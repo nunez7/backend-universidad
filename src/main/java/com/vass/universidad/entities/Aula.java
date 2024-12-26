@@ -3,19 +3,43 @@ package com.vass.universidad.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="aulas")
 public class Aula {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String abreviatura;
 
     private String descripcion;
 
+    @Column(name = "cantidad_pupitres")
     private Integer cantidadPupitres;
 
+    @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
 
+    @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion;
+
+    @ManyToOne(optional = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "edificio_id", foreignKey = @ForeignKey(name = "FK_EDIFICIO_ID"))
+    private Edificio edificio;
 
     public Aula() {
     }
@@ -73,6 +97,24 @@ public class Aula {
 
     public void setFechaModificacion(LocalDateTime fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
+    }
+
+    public Edificio getEdificio() {
+        return edificio;
+    }
+
+    public void setEdificio(Edificio edificio) {
+        this.edificio = edificio;
+    }
+
+    @PrePersist
+    public void antesPersistir(){
+        this.fechaAlta = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void antesUpdate(){
+        this.fechaModificacion = LocalDateTime.now();
     }
 
     @Override

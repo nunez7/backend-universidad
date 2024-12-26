@@ -1,5 +1,8 @@
 package com.vass.universidad.entities;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Direccion {
 
     private String calle;
