@@ -2,12 +2,16 @@ package com.vass.universidad.entities;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -37,6 +41,12 @@ public class Carrera {
     
     @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion;
+
+    @OneToMany(mappedBy = "carrera", fetch = FetchType.LAZY)
+    private Set<Alumno> alumnos;
+
+    @ManyToMany(mappedBy = "carreras", fetch = FetchType.LAZY)
+    private Set<Profesor> profesores;
 
     public Carrera() {
     }
@@ -94,6 +104,14 @@ public class Carrera {
 
     public void setFechaModificacion(LocalDateTime fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
+    }
+
+    public Set<Alumno> getAlumnos() {
+        return alumnos;
+    }
+
+    public Set<Profesor> getProfesores() {
+        return profesores;
     }
 
     @PrePersist

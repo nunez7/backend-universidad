@@ -3,18 +3,42 @@ package com.vass.universidad.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "personas")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Persona {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false, length = 60)
     private String nombre;
 
+    @Column(nullable = false, length = 60)
     private String apellidos;
 
+    @Embedded
+    @AttributeOverride(name = "codigoPostal", column = @Column(name = "codigo_postal"))
     private Direccion direccion;
 
+    @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
 
+    @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion;
 
     public Persona() {
@@ -73,6 +97,16 @@ public abstract class Persona {
 
     public void setFechaModificacion(LocalDateTime fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
+    }
+
+    @PrePersist
+    public void antesPersistir(){
+        this.fechaAlta = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void antesUpdate(){
+        this.fechaModificacion = LocalDateTime.now();
     }
 
     @Override
