@@ -1,4 +1,4 @@
-package com.vass.universidad.services;
+package com.vass.universidad.commands;
 
 import com.vass.universidad.entities.Carrera;
 import com.vass.universidad.services.contract.CarreraService;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component
