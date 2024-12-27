@@ -1,6 +1,5 @@
 package com.vass.universidad.services;
 
-import com.vass.universidad.BackendUniversidadApplication;
 import com.vass.universidad.entities.Carrera;
 import com.vass.universidad.services.contract.CarreraService;
 import org.slf4j.Logger;

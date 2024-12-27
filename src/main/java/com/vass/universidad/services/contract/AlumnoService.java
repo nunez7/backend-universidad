@@ -1,5 +1,7 @@
 package com.vass.universidad.services.contract;
 
-public interface AlumnoService extends PersonaService{
+import com.vass.universidad.entities.Persona;
 
+public interface AlumnoService extends PersonaService{
+    Iterable<Persona> buscarAlumnosPorNombreCarrera(String nombre);
 }
