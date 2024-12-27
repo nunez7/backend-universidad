@@ -16,12 +16,12 @@ public class PersonaServiceImpl extends GenericServiceImpl<Persona, PersonaRepos
     @Override
     @Transactional(readOnly = true)
     public Optional<Persona> buscarPorNombreYApellido(String nombre, String apellido) {
-        return repository.buscarPorNombreYApellido(nombre, apellido);
+        return repository.buscarPorNombreYApellidos(nombre, apellido);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Iterable<Persona> buscarPersonaPorApellido(String apellido) {
-        return repository.buscarPersonaPorApellido(apellido);
+        return repository.buscarPersonaPorApellidos(apellido);
     }
 }

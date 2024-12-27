@@ -10,10 +10,10 @@ import java.util.Optional;
 @NoRepositoryBean
 public interface PersonaRepository extends CrudRepository<Persona, Integer> {
 
-    @Query("select p from Persona p where p.nombre = ?1 and p.apellido = ?2")
-    Optional<Persona> buscarPorNombreYApellido(String nombre, String apellido);
+    @Query("select p from Persona p where p.nombre = ?1 and p.apellidos = ?2")
+    Optional<Persona> buscarPorNombreYApellidos(String nombre, String apellido);
 
-    @Query("select p from Persona p where p.apellido like %?1%")
-    Iterable<Persona> buscarPersonaPorApellido(String apellido);
+    @Query("select p from Persona p where p.apellidos like %?1%")
+    Iterable<Persona> buscarPersonaPorApellidos(String apellido);
 
 }
