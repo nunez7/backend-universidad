@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @Service
 public class AlumnoServiceImpl implements AlumnoService {
-
     @Autowired
     @Qualifier("repositorioAlumnos")
     private PersonaRepository repository;

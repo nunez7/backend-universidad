@@ -12,6 +12,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class BackendUniversidadApplication {
 
@@ -29,10 +31,10 @@ public class BackendUniversidadApplication {
 	@Bean
 	public CommandLineRunner runner(){
 		return args -> {
-			Direccion direc = new Direccion("Juarez", "34", "63000", "Santiago Ixcuintla");
-			Persona alumno = new Alumno(null, "Raul", "Perez", direc, "55-323");
+			/*Direccion direc = new Direccion("Escuinapa", "105", "32000", "La Boca");
+			Persona alumno = new Alumno(null, "Juan", "Martir", direc, "55-324");
 			Persona alumnoSave = service.save(alumno);
-			logger.info("ALUMNO NUEVO: {}", alumnoSave);
+			logger.info("ALUMNO NUEVO: {}", alumnoSave);*/
 		};
 	}
 
