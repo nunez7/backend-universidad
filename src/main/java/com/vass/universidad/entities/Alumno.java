@@ -29,8 +29,9 @@ public class Alumno extends Persona{
     public Alumno() {
     }
 
-    public Alumno(Integer id, String nombre, String apellidos, Direccion direccion) {
+    public Alumno(Integer id, String nombre, String apellidos, Direccion direccion,String matricula) {
         super(id, nombre, apellidos, direccion);
+        this.matricula = matricula;
     }
 
     public String getMatricula() {

@@ -13,6 +13,16 @@ public class Direccion {
 
     private String localidad;
 
+    public Direccion() {
+    }
+
+    public Direccion(String calle, String numero, String codigoPostal, String localidad) {
+        this.calle = calle;
+        this.numero = numero;
+        this.codigoPostal = codigoPostal;
+        this.localidad = localidad;
+    }
+
     public String getCalle() {
         return calle;
     }

@@ -14,8 +14,8 @@ public class CarreraCommando implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Carrera inSistemas = new Carrera(null, "Ingenieria en Sistemas", 12, 8);
+        /*Carrera inSistemas = new Carrera(null, "Ingenieria en Sistemas", 12, 8);
         Carrera cSave = carreraService.save(inSistemas);
-        System.out.println(cSave.toString());
+        System.out.println(cSave.toString());*/
     }
 }
