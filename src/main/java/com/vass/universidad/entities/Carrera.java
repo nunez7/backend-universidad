@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,29 +24,23 @@ public class Carrera {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @Column(nullable = false, unique = true, length = 150)
     private String nombre;
-
     @Column(name = "cantidad_materias")
     private Integer cantidadMaterias;
-
-    
     @Column(name = "cantidad_cuatrimestres")
     private Integer cantidadCuatrimestres;
-
-    
     @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
-
-    
     @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion;
 
     @OneToMany(mappedBy = "carrera", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"carrera"})
     private Set<Alumno> alumnos;
 
     @ManyToMany(mappedBy = "carreras", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"carreras"})
     private Set<Profesor> profesores;
 
     public Carrera() {
