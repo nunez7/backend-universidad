@@ -3,6 +3,8 @@ package com.vass.universidad.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -19,6 +21,15 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "personas")
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value =  Alumno.class, name = "alumno"),
+        @JsonSubTypes.Type(value = Profesor.class, name = "profesor")
+})
 public abstract class Persona {
 
     @Id

@@ -1,5 +1,6 @@
 package com.vass.universidad.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,6 +25,7 @@ public class Alumno extends Persona{
         fetch = FetchType.LAZY
     )
     @JoinColumn(name = "carrera_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "alumnos"})
     private Carrera carrera;
 
     public Alumno() {
