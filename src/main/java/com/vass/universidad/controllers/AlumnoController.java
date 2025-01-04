@@ -8,9 +8,12 @@ import com.vass.universidad.services.contract.PersonaService;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -56,29 +59,43 @@ public class AlumnoController extends PersonaController{
     }*/
 
     @PutMapping("/{id}")
-    public Persona actualizarAlumno(@PathVariable Integer id, @RequestBody Persona alumno) throws BadRequestException {
+    public ResponseEntity<?> actualizarAlumno(@PathVariable Integer id, @RequestBody Persona alumno) throws BadRequestException {
         Persona alumnoUpdate = null;
+        Map<String, Object> mensaje = new HashMap<>();
         Optional<Persona> oAlumno = service.findById(id);
         if(!oAlumno.isPresent()) {
-            throw new BadRequestException(String.format("Alumno con id %d no existe", id));
+            //throw new BadRequestException(String.format("Alumno con id %d no existe", id));
+            mensaje.put("success", Boolean.FALSE);
+            mensaje.put("mensaje", String.format("Alumno con id %d no existe", id));
+            return ResponseEntity.badRequest().body(mensaje);
         }
         alumnoUpdate = oAlumno.get();
         alumnoUpdate.setNombre(alumno.getNombre());
         alumnoUpdate.setApellidos(alumno.getApellidos());
         alumnoUpdate.setDireccion(alumno.getDireccion());
-        return service.save(alumnoUpdate);
+        mensaje.put("datos", service.save(alumnoUpdate));
+        mensaje.put("success", Boolean.TRUE);
+
+        return ResponseEntity.ok(mensaje);
     }
 
     @PutMapping("/{idAlumno}/carrera/{idCarrera}")
-    public Persona asignarCarreraAlumno(@PathVariable Integer idAlumno, @PathVariable Integer idCarrera) throws BadRequestException {
+    public ResponseEntity<?> asignarCarreraAlumno(@PathVariable Integer idAlumno, @PathVariable Integer idCarrera) throws BadRequestException {
         Optional<Persona> oAlumno = service.findById(idAlumno);
+        Map<String, Object> mensaje = new HashMap<>();
         if(!oAlumno.isPresent()) {
-            throw new BadRequestException(String.format("Alumno con id %d no existe", idAlumno));
+            //throw new BadRequestException(String.format("Alumno con id %d no existe", idAlumno));
+            mensaje.put("success", Boolean.FALSE);
+            mensaje.put("mensaje", String.format("Alumno con id %d no existe", idAlumno));
+            return ResponseEntity.badRequest().body(mensaje);
         }
 
         Optional<Carrera> oCarrera = carreraService.findById(idCarrera);
         if(!oCarrera.isPresent()){
-            throw new BadRequestException(String.format("Carrera con id %d no existe", idCarrera));
+            //throw new BadRequestException(String.format("Carrera con id %d no existe", idCarrera));
+            mensaje.put("success", Boolean.FALSE);
+            mensaje.put("mensaje", String.format("Carrera con id %d no existe", idCarrera));
+            return ResponseEntity.badRequest().body(mensaje);
         }
 
         Persona alumno = oAlumno.get();
@@ -86,6 +103,8 @@ public class AlumnoController extends PersonaController{
 
         ((Alumno)alumno).setCarrera(carrera);
 
-        return service.save(alumno);
+        mensaje.put("datos", service.save(alumno));
+        mensaje.put("success", Boolean.TRUE);
+        return ResponseEntity.ok(mensaje);
     }
 }

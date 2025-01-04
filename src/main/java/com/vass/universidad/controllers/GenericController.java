@@ -3,11 +3,14 @@ package com.vass.universidad.controllers;
 import com.vass.universidad.entities.Persona;
 import com.vass.universidad.services.contract.GenericService;
 import org.apache.coyote.BadRequestException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class GenericController <E, S extends GenericService<E>>{
@@ -20,28 +23,41 @@ public class GenericController <E, S extends GenericService<E>>{
     }
 
     @GetMapping
-    public List<E> obtenerTodos() throws BadRequestException {
+    public ResponseEntity<?> obtenerTodos() throws BadRequestException {
+        Map<String, Object> mensaje = new HashMap<>();
         List<E> listado = (List<E>) service.findAll();
         if(listado.isEmpty()) {
-            throw new BadRequestException(String.format("No se han encontrado %ss", nombreEntidad));
+            //throw new BadRequestException(String.format("No se han encontrado %ss", nombreEntidad));
+            mensaje.put("success", Boolean.FALSE);
+            mensaje.put("mensaje", String.format("No existen %ss", nombreEntidad));
+            return ResponseEntity.badRequest().body(mensaje);
         }
-        return listado;
+        mensaje.put("success", Boolean.TRUE);
+        mensaje.put("datos", listado);
+        return ResponseEntity.ok(mensaje);
     }
 
     //obtenerPorID (Id)
     @GetMapping("/{id}")
-    public E obtenerPorId(@PathVariable(required = false) Integer id) throws BadRequestException {
+    public ResponseEntity<?> obtenerPorId(@PathVariable(required = false) Integer id) throws BadRequestException {
         Optional<E> verificaExistencia = service.findById(id);
+        Map<String, Object> mensaje = new HashMap<>();
         if(!verificaExistencia.isPresent()) {
-            throw new BadRequestException(String.format("No existe id de %ss", nombreEntidad));
+            //throw new BadRequestException(String.format("No existe id de %ss", nombreEntidad));
+            mensaje.put("success", Boolean.FALSE);
+            mensaje.put("mensaje", String.format("No existen id de %ss", nombreEntidad));
+            return ResponseEntity.badRequest().body(mensaje);
         }
-        return verificaExistencia.get();
+        mensaje.put("success", Boolean.TRUE);
+        mensaje.put("datos", verificaExistencia);
+        return ResponseEntity.ok(mensaje);
     }
 
     //borrarEntidadPorId (Id)
     @DeleteMapping("/{id}")
-    public void eliminarEntidad(@PathVariable Integer id) {
+    public ResponseEntity<?> eliminarEntidad(@PathVariable Integer id) {
         service.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     //altaEntidad (Entidad)
