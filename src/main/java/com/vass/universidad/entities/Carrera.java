@@ -16,6 +16,10 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "carreras")
@@ -24,10 +28,16 @@ public class Carrera {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotNull
+    @NotEmpty(message = "Debes ingresar un valor de nombre")
     @Column(nullable = false, unique = true, length = 150)
     private String nombre;
+    @Positive(message = "La cantidad de materias no puede ser negativo")
     @Column(name = "cantidad_materias")
     private Integer cantidadMaterias;
+
+    @Positive(message = "La cantidad de cuatrimestres no puede ser negativo")
     @Column(name = "cantidad_cuatrimestres")
     private Integer cantidadCuatrimestres;
     @Column(name = "fecha_alta")

@@ -6,6 +6,7 @@ import com.vass.universidad.services.contract.CarreraService;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -24,24 +25,14 @@ public class CarreraController extends GenericController<Carrera, CarreraService
     }
 
     @PostMapping
-    public ResponseEntity<?> altaCarrera(@RequestBody Carrera carrera) throws BadRequestException {
-        Map<String, Object> mensaje = new HashMap<>();
-        if(carrera.getCantidadCuatrimestres() < 0) {
-            //throw new BadRequestException("El campo cantida de cuatrimestres no puede ser negativo");
-            mensaje.put("success", Boolean.FALSE);
-            mensaje.put("mensaje", "El campo cantida de cuatrimestres no puede ser negativo");
-            return ResponseEntity.badRequest().body(mensaje);
+    public ResponseEntity<?> altaCarrera(@RequestBody Carrera carrera, BindingResult result) throws BadRequestException {
+        Map<String, Object> validaciones = new HashMap<>();
+        if(result.hasErrors()) {
+            result.getFieldErrors()
+                    .forEach(error -> validaciones.put(error.getField(), error.getDefaultMessage()));
+            return ResponseEntity.badRequest().body(validaciones);
         }
-        if(carrera.getCantidadMaterias() < 0) {
-            //throw new BadRequestException("El campo cantida de materias no puede ser negativo");
-            mensaje.put("success", Boolean.FALSE);
-            mensaje.put("mensaje", "El campo cantida de materias no puede ser negativo");
-            return ResponseEntity.badRequest().body(mensaje);
-        }
-
-        mensaje.put("success", Boolean.TRUE);
-        mensaje.put("datos", service.save(carrera));
-        return ResponseEntity.ok(mensaje);
+        return ResponseEntity.ok(service.save(carrera));
     }
 
     @PutMapping("/{id}")
