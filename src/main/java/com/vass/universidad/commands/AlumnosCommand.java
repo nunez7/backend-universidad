@@ -19,7 +19,7 @@ public class AlumnosCommand implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Optional<Carrera> ingSistemas = carreraService.findById(1);
+        //Optional<Carrera> ingSistemas = carreraService.findById(1);
 
         /*Iterable<Persona> alumnos = personaService.findAll();
         alumnos.forEach(alumno -> ((Alumno)alumno).setCarrera(ingSistemas.get()));

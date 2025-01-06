@@ -18,21 +18,23 @@ import java.util.Map;
 @RestController
 @RequestMapping("/carreras")
 @ConditionalOnProperty(prefix = "app", name = "controller.enable-dto", havingValue = "true")
-public class CarreraDTOController {
-
-    @Autowired
-    private CarreraService service;
+public class CarreraDTOController extends GenericDTOController<Carrera, CarreraService>{
 
     @Autowired
     private CarreraMapperMS mapper;
 
+    public CarreraDTOController(CarreraService service) {
+        super(service, "Carrera");
+    }
+
     @GetMapping
-    public ResponseEntity<?> obtenerTodos(){
+    public ResponseEntity<?> obtenerCarreras(){
         Map<String, Object> mensaje = new HashMap<>();
-        List<Carrera> carreras = (List<Carrera>) service.findAll();
+        List<Carrera> carreras = super.obtenerTodos();
+
         if(carreras.isEmpty()){
             mensaje.put("success", Boolean.FALSE);
-            mensaje.put("mensaje", "No se econtraron %ss cargadas");
+            mensaje.put("mensaje", "No se econtraron carreras cargadas");
             return ResponseEntity.badRequest().body(mensaje);
         }
         List<CarreraDTO> carrerasDTOS = carreras.stream()

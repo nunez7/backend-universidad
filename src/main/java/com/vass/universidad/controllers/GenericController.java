@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Deprecated
 public class GenericController <E, S extends GenericService<E>>{
 
     protected final S service;
