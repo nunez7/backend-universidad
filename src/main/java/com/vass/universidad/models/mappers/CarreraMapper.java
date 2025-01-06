@@ -3,6 +3,7 @@ package com.vass.universidad.models.mappers;
 import com.vass.universidad.models.dto.CarreraDTO;
 import com.vass.universidad.models.entities.Carrera;
 
+@Deprecated
 public class CarreraMapper {
 
     public static CarreraDTO mapCarrera(Carrera carrera){

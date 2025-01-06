@@ -2,7 +2,7 @@ package com.vass.universidad.controllers.dto;
 
 import com.vass.universidad.models.dto.CarreraDTO;
 import com.vass.universidad.models.entities.Carrera;
-import com.vass.universidad.models.mappers.CarreraMapper;
+import com.vass.universidad.models.mappers.mapstruct.CarreraMapperMS;
 import com.vass.universidad.services.contract.CarreraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -23,9 +23,12 @@ public class CarreraDTOController {
     @Autowired
     private CarreraService service;
 
+    @Autowired
+    private CarreraMapperMS mapper;
+
     @GetMapping
     public ResponseEntity<?> obtenerTodos(){
-        Map<String, Object> mensaje = new HashMap();
+        Map<String, Object> mensaje = new HashMap<>();
         List<Carrera> carreras = (List<Carrera>) service.findAll();
         if(carreras.isEmpty()){
             mensaje.put("success", Boolean.FALSE);
@@ -33,7 +36,7 @@ public class CarreraDTOController {
             return ResponseEntity.badRequest().body(mensaje);
         }
         List<CarreraDTO> carrerasDTOS = carreras.stream()
-                .map(CarreraMapper::mapCarrera)
+                .map(mapper::mapCarrera)
                 .toList();
 
         mensaje.put("success", Boolean.TRUE);

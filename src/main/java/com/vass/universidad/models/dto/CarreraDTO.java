@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarreraDTO {
-
     private Integer codigo;
     private String nombre;
     private Integer cantidad_materias;
