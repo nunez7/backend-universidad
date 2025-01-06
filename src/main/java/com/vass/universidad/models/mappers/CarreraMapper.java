@@ -9,8 +9,8 @@ public class CarreraMapper {
         CarreraDTO dto = new CarreraDTO();
         dto.setCodigo(carrera.getId());
         dto.setNombre(carrera.getNombre());
-        dto.setCantidadCuatrimestres(carrera.getCantidadCuatrimestres());
-        dto.setCantidadMaterias(carrera.getCantidadMaterias());
+        dto.setCantidad_cuatrimestres(carrera.getCantidadCuatrimestres());
+        dto.setCantidad_materias(carrera.getCantidadMaterias());
         return dto;
     }
 
