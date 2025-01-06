@@ -1,6 +1,6 @@
 package com.vass.universidad.services.contract;
 
-import com.vass.universidad.entities.Persona;
+import com.vass.universidad.models.entities.Persona;
 
 import java.util.Optional;
 

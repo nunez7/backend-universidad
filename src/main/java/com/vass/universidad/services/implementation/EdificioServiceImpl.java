@@ -1,6 +1,6 @@
 package com.vass.universidad.services.implementation;
 
-import com.vass.universidad.entities.Edificio;
+import com.vass.universidad.models.entities.Edificio;
 import com.vass.universidad.repositories.EdificioRepository;
 import com.vass.universidad.services.contract.EdificioService;
 import org.springframework.beans.factory.annotation.Autowired;

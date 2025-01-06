@@ -1,6 +1,6 @@
 package com.vass.universidad.services.contract;
 
-import com.vass.universidad.entities.Aula;
+import com.vass.universidad.models.entities.Aula;
 
 import java.util.Optional;
 

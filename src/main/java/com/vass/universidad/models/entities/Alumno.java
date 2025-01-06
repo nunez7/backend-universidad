@@ -1,4 +1,4 @@
-package com.vass.universidad.entities;
+package com.vass.universidad.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;

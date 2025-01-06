@@ -1,6 +1,6 @@
 package com.vass.universidad.services.contract;
 
-import com.vass.universidad.entities.Carrera;
+import com.vass.universidad.models.entities.Carrera;
 
 public interface CarreraService extends GenericService<Carrera>{
 

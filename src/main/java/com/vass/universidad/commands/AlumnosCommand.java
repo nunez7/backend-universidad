@@ -1,9 +1,6 @@
 package com.vass.universidad.commands;
 
-import com.vass.universidad.entities.Alumno;
-import com.vass.universidad.entities.Carrera;
-import com.vass.universidad.entities.Persona;
-import com.vass.universidad.services.contract.AlumnoService;
+import com.vass.universidad.models.entities.Carrera;
 import com.vass.universidad.services.contract.CarreraService;
 import com.vass.universidad.services.contract.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;

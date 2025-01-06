@@ -1,7 +1,7 @@
 package com.vass.universidad.controllers;
 
 
-import com.vass.universidad.entities.Persona;
+import com.vass.universidad.models.entities.Persona;
 import com.vass.universidad.services.contract.PersonaService;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;

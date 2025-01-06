@@ -1,4 +1,4 @@
-package com.vass.universidad.entities;
+package com.vass.universidad.models.entities;
 
 import com.vass.universidad.enums.TipoEmpleado;
 

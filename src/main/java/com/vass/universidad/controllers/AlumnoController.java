@@ -1,8 +1,8 @@
 package com.vass.universidad.controllers;
 
-import com.vass.universidad.entities.Alumno;
-import com.vass.universidad.entities.Carrera;
-import com.vass.universidad.entities.Persona;
+import com.vass.universidad.models.entities.Alumno;
+import com.vass.universidad.models.entities.Carrera;
+import com.vass.universidad.models.entities.Persona;
 import com.vass.universidad.services.contract.CarreraService;
 import com.vass.universidad.services.contract.PersonaService;
 import org.apache.coyote.BadRequestException;
@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 

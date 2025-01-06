@@ -1,7 +1,7 @@
 package com.vass.universidad.services.implementation;
 
 
-import com.vass.universidad.entities.Persona;
+import com.vass.universidad.models.entities.Persona;
 import com.vass.universidad.repositories.PersonaRepository;
 import com.vass.universidad.repositories.ProfesorRepository;
 import com.vass.universidad.services.contract.ProfesorService;

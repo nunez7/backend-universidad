@@ -1,4 +1,4 @@
-package com.vass.universidad.entities;
+package com.vass.universidad.models.entities;
 
 import java.math.BigDecimal;
 import java.util.Set;

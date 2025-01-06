@@ -1,6 +1,6 @@
 package com.vass.universidad.services.implementation;
 
-import com.vass.universidad.entities.Persona;
+import com.vass.universidad.models.entities.Persona;
 import com.vass.universidad.enums.TipoEmpleado;
 import com.vass.universidad.repositories.EmpleadoRepository;
 import com.vass.universidad.repositories.PersonaRepository;

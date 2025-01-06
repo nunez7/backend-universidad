@@ -1,6 +1,6 @@
 package com.vass.universidad.commands;
 
-import com.vass.universidad.entities.Carrera;
+import com.vass.universidad.models.entities.Carrera;
 import com.vass.universidad.services.contract.CarreraService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

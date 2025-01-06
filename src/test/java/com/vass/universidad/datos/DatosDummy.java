@@ -1,6 +1,7 @@
 package com.vass.universidad.datos;
 
 import com.vass.universidad.entities.*;
+import com.vass.universidad.models.entities.*;
 
 import java.math.BigDecimal;
 

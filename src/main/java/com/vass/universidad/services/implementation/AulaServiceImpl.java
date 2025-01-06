@@ -1,6 +1,6 @@
 package com.vass.universidad.services.implementation;
 
-import com.vass.universidad.entities.Aula;
+import com.vass.universidad.models.entities.Aula;
 import com.vass.universidad.repositories.AulaRepository;
 import com.vass.universidad.services.contract.AulaService;
 import org.springframework.beans.factory.annotation.Autowired;

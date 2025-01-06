@@ -1,6 +1,6 @@
 package com.vass.universidad.repositorios;
 import com.vass.universidad.datos.DatosDummy;
-import com.vass.universidad.entities.Carrera;
+import com.vass.universidad.models.entities.Carrera;
 import com.vass.universidad.repositories.CarreraRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

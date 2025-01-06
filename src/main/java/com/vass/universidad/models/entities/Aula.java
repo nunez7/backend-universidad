@@ -1,53 +1,54 @@
-package com.vass.universidad.entities;
+package com.vass.universidad.models.entities;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.Set;
 
-import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "edificios")
-public class Edificio {
+@Table(name="aulas")
+public class Aula {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true, nullable = false)
+    private String abreviatura;
+
     private String descripcion;
 
-    @Embedded
-    @AttributeOverride(name = "codigoPostal", column = @Column(name = "codigo_postal"))
-    private Direccion direccion;
+    @Column(name = "cantidad_pupitres")
+    private Integer cantidadPupitres;
 
-    @Column(name = "fecha_alta") 
+    @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
 
     @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion;
 
-    @OneToMany(mappedBy = "edificio", fetch = FetchType.LAZY)
-    private Set<Aula> aulas;
+    @ManyToOne(optional = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "edificio_id", foreignKey = @ForeignKey(name = "FK_EDIFICIO_ID"))
+    private Edificio edificio;
 
-    public Edificio() {
+    public Aula() {
     }
 
-    public Edificio(Integer id, String descripcion, Direccion direccion) {
+    public Aula(Integer id, String abreviatura, String descripcion, Integer cantidadPupitres) {
         this.id = id;
+        this.abreviatura = abreviatura;
         this.descripcion = descripcion;
-        this.direccion = direccion;
+        this.cantidadPupitres = cantidadPupitres;
     }
 
     public Integer getId() {
@@ -58,6 +59,14 @@ public class Edificio {
         this.id = id;
     }
 
+    public String getAbreviatura() {
+        return abreviatura;
+    }
+
+    public void setAbreviatura(String abreviatura) {
+        this.abreviatura = abreviatura;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -66,12 +75,12 @@ public class Edificio {
         this.descripcion = descripcion;
     }
 
-    public Direccion getDireccion() {
-        return direccion;
+    public Integer getCantidadPupitres() {
+        return cantidadPupitres;
     }
 
-    public void setDireccion(Direccion direccion) {
-        this.direccion = direccion;
+    public void setCantidadPupitres(Integer cantidadPupitres) {
+        this.cantidadPupitres = cantidadPupitres;
     }
 
     public LocalDateTime getFechaAlta() {
@@ -90,39 +99,13 @@ public class Edificio {
         this.fechaModificacion = fechaModificacion;
     }
 
-    
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, descripcion);
+    public Edificio getEdificio() {
+        return edificio;
     }
 
-    public Set<Aula> getAulas() {
-        return aulas;
+    public void setEdificio(Edificio edificio) {
+        this.edificio = edificio;
     }
-
-    public void setAulas(Set<Aula> aulas) {
-        this.aulas = aulas;
-    }
-
-    @Override
-    public String toString() {
-        return "Edificio{" +
-                "id=" + id +
-                ", descripcion='" + descripcion + '\'' +
-                ", direccion=" + direccion +
-                ", fechaAlta=" + fechaAlta +
-                ", fechaModificacion=" + fechaModificacion +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Edificio edificio = (Edificio) o;
-        return Objects.equals(id, edificio.id) && Objects.equals(descripcion, edificio.descripcion);
-    }
-
 
     @PrePersist
     public void antesPersistir(){
@@ -132,5 +115,30 @@ public class Edificio {
     @PreUpdate
     public void antesUpdate(){
         this.fechaModificacion = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Aula{" +
+                "id=" + id +
+                ", abreviatura='" + abreviatura + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", cantidadPupitres=" + cantidadPupitres +
+                ", fechaAlta=" + fechaAlta +
+                ", fechaModificacion=" + fechaModificacion +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Aula aula = (Aula) o;
+        return Objects.equals(id, aula.id) && Objects.equals(abreviatura, aula.abreviatura);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, abreviatura);
     }
 }

@@ -1,6 +1,6 @@
 package com.vass.universidad.repositories;
 
-import com.vass.universidad.entities.Persona;
+import com.vass.universidad.models.entities.Persona;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.vass.universidad.entities;
+package com.vass.universidad.models.entities;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -19,7 +19,6 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "carreras")

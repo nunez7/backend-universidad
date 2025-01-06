@@ -1,6 +1,6 @@
 package com.vass.universidad.services.contract;
 
-import com.vass.universidad.entities.Edificio;
+import com.vass.universidad.models.entities.Edificio;
 
 import java.time.LocalDateTime;
 import java.util.Optional;

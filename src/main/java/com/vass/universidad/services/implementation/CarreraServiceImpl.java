@@ -1,6 +1,6 @@
 package com.vass.universidad.services.implementation;
 
-import com.vass.universidad.entities.Carrera;
+import com.vass.universidad.models.entities.Carrera;
 import com.vass.universidad.repositories.CarreraRepository;
 import com.vass.universidad.services.contract.CarreraService;
 import org.springframework.beans.factory.annotation.Autowired;

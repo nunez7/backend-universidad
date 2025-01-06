@@ -1,6 +1,6 @@
 package com.vass.universidad.repositories;
 
-import com.vass.universidad.entities.Edificio;
+import com.vass.universidad.models.entities.Edificio;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
