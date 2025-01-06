@@ -8,6 +8,7 @@ import com.vass.universidad.services.contract.PersonaService;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,10 @@ import java.util.Map;
 import java.util.Optional;
 
 
+@Deprecated
 @RestController
 @RequestMapping("/alumnos")
+@ConditionalOnProperty(prefix = "app", name = "controller.enable-dto", havingValue = "false")
 public class AlumnoController extends PersonaController{
 
     private final CarreraService carreraService;
