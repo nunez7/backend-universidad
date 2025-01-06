@@ -28,15 +28,12 @@ public class Carrera {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @NotEmpty(message = "Debes ingresar un valor de nombre")
     @Column(nullable = false, unique = true, length = 150)
     private String nombre;
-    @Positive(message = "La cantidad de materias no puede ser negativo")
+
     @Column(name = "cantidad_materias")
     private Integer cantidadMaterias;
 
-    @Positive(message = "La cantidad de cuatrimestres no puede ser negativo")
     @Column(name = "cantidad_cuatrimestres")
     private Integer cantidadCuatrimestres;
     @Column(name = "fecha_alta")
